@@ -1,0 +1,6 @@
+DirectoryIndex 1.php
+
+<Files config.inc>
+order allow,deny 
+deny from all 
+</Files>

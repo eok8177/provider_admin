@@ -1,0 +1,18 @@
+<?php
+$SERVER="192.168.0.1";
+$USER="adm";
+$PASSWD="ujghb;";
+$DB1="dialup";
+$DB2="dialup_account";
+
+if(!mysql_connect($SERVER,$USER,$PASSWD))
+  {
+   echo $HEAD;
+   echo $CP;
+   echo $BODY;
+   echo "<h2>$ERROR</h2>";
+   echo "</body></html>";
+   exit;
+  }
+
+?>

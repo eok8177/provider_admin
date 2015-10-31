@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=koi8-r">
+<title> Страничка Администратора</title>
+<LINK href="phpru.css" type=text/css rel=stylesheet>
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="10">
+
+<tr><td valign="top">
+<a href="/adm/">Online</a><br>
+<a href="?mod=all_dial">DialUp За месяц</a><br>
+<a href="?mod=dial">DialUp</a><br>
+<a href="?mod=all_home">HOME За месяц</a><br>
+<a href="?mod=home">Home</a><br>
+<a href="?mod=pay">Проплата</a><br>
+<a href="?mod=traff">Графики</a><br>
+<a href="?mod=lan">Сеть</a><br>
+<br><br><br>
+
+
+<!------------------------------------------>
+
+Статистика за месяц на DialUp
+<form action="?mod=dial_stat" method="POST">
+
+<?php
+
+require("/var/www/dbm_0.1");
+mysql_select_db($DB1) or die("No Select DB");
+
+$sql ="SELECT login FROM users ORDER BY login";
+$query = mysql_query($sql) or die ("Query error");
+
+  $s=mysql_fetch_array($query);
+echo '<select name="login" size=1>';
+echo " <option value=$s[login] selected>$s[login]</option>\n";
+
+for ($i=0; $i<(mysql_num_rows($query)-1); $i++)
+ {
+    $s=mysql_fetch_array($query);
+    echo " <option value=$s[login]>$s[login]</option>\n";
+ }
+echo '</select><br>';
+
+$m=date(m);
+echo '<select name="mon" size=1>';
+for ($i=01; $i<=12; $i++){
+    $n=$i;
+    $len=strlen($i);
+    if ($len==1){$n="0".$i;}
+    echo "<option value=$n";
+    if ($n==$m){echo " selected";}
+    echo " >$n</option>";
+ }
+echo '</select> ';
+
+echo '<input type="submit" name="go" value="Просмотр">
+
+</form>
+';
+#######################################################################
+echo "Статистика за месяц на Home";
+echo '<form action="?mod=home_stat" method="POST">';
+
+require("/var/www/dbm_10.1");
+mysql_select_db($DB1) or die("No Select DB");
+
+$sql ="SELECT name FROM users ORDER BY name";
+$query = mysql_query($sql) or die ("Query error");
+
+  $s=mysql_fetch_array($query);
+echo '<select name="login" size=1>';
+echo " <option value=$s[name] selected>$s[name]</option>\n";
+
+for ($i=0; $i<(mysql_num_rows($query)-1); $i++)
+ {
+    $s=mysql_fetch_array($query);
+    echo " <option value=$s[name]>$s[name]</option>\n";
+ }
+echo '</select><br>';
+
+$m=date(m);
+echo '<select name="mon" size=1>';
+for ($i=01; $i<=12; $i++){
+    $n=$i;
+    $len=strlen($i);
+    if ($len==1){$n="0".$i;}
+    echo "<option value=$n";
+    if ($n==$m){echo " selected";}
+    echo " >$n</option>";
+ }
+echo '</select> ';
+
+echo '<input type="submit" name="go" value="Просмотр">
+
+</form>
+';
+
+#############################################################
+?>
+
+<a href="/" title="Вернуться на главную">Главная</a>
+
+</td><td valign="top">
